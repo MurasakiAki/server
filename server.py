@@ -10,9 +10,13 @@ users = {
 }
 
 # Main PIPBOI page
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def main():
-    
+    if request.method == 'POST':
+        button_clicked = request.form['button']
+        if button_clicked == 'login-button':
+            return redirect(url_for('login'))
+    return render_template('index.html')
 
 # Route for the login page
 @app.route('/login', methods=['GET', 'POST'])
